@@ -3,7 +3,7 @@
 //section5
 
 //問題1
-$name = '牧野'; 
+$name = '牧野';
 echo "私の名前は「".$name."」です。\n";
 
 //問題2
@@ -12,6 +12,7 @@ echo $num."\n";
 echo ($num / 2)."\n";
 
 //問題3 
+date_default_timezone_set('Asia/Tokyo');
 echo date('現在の時刻は、'.'Y年m月d日 H時i分s秒'."です。\n");
 
 //問題4
@@ -49,9 +50,11 @@ foreach ($cities as $value) {
 }
 
 //問題8
-$key1 = array_search('さいたま市', $cities);
-$value1 = $cities[$key1];
-echo $key1."の県庁所在地は、".$value1."です。\n";
+foreach ($cities as $key => $value) {
+    if($key === '埼玉県'){
+        echo $key."の県庁所在地は、".$value."です。\n";
+    }
+}
 
 //問題9
 $cities += [
@@ -59,7 +62,7 @@ $cities += [
     '沖縄県'=>'那覇市'];
     
 foreach ($cities as $key => $value){
-    if($key == '愛知県' || $key == '沖縄県') {
+    if($key === '愛知県' || $key === '沖縄県') {
         echo $key."は関東地方ではありません。\n";
     } else {
         echo $key."の県庁所在地は、".$value."です。\n";
@@ -75,25 +78,36 @@ hello('金谷');
 hello('安藤');
 
 //問題11
-function calcTaxInPrice($price){
-    $taxInPrice = $price*1.08;
-    return $price."円の商品の税込価格は".$taxInPrice."円です。\n";
+function calcTaxInPrice($taxInPrice){
+    $taxInPrice *= 1.08;
+    return $taxInPrice;
 }
 
 $price = 1000;
-echo calcTaxInPrice($price);
+echo $price."円の商品の税込価格は".calcTaxInPrice($price)."円です。\n";
+
+// function calcTaxInPrice($price){
+//     $taxInPrice = $price*1.08;
+//     return $price."円の商品の税込価格は".$taxInPrice."円です。\n";
+// }
+
+// $price = 1000;
+// echo calcTaxInPrice($price);
+
+
 
 
 //問題12
 function distinguishNum($num){
-    if ($num % 2 == 0){
+    if ($num % 2 === 0){
         return $num."は偶数です。\n";
     } else {
         return $num."は奇数です。\n";
     }
 }
 
-echo distinguishNum(20);
+echo distinguishNum(11);
+echo distinguishNum(24);
 
 //問題13
 function evaluateGrade($score){
@@ -127,11 +141,12 @@ evaluateGrade('E');
 echo "1から100までのFizzBuzzを実行します。\n";
 
 for ($i = 1; $i <= 100; $i++) {
-    if($i % 15 == 0) {
+    //($i % 3 === 0 && $i % 5 === 0)
+    if($i % 15 === 0) {
         echo "FizzBuzz\n";
-    } elseif($i % 3 == 0) {
+    } elseif($i % 3 === 0) {
         echo "Fizz\n";
-    } elseif($i % 5 == 0) {
+    } elseif($i % 5 === 0) {
         echo "Buzz\n";
     } else {
         echo "$i\n";
@@ -170,13 +185,13 @@ foreach ($personalInfos as $key => $value) {
 //問題3
 $ageList = [25, 30, 18];
 
-// $personalInfos[0]['age'] = 25;
-// $personalInfos[1]['age'] = 30;
-// $personalInfos[2]['age'] = 28;
-
 foreach ($ageList as $key => $value) {
     $personalInfos[$key]['age'] = $value;
 }
+
+// $personalInfos[0]['age'] = 25;
+// $personalInfos[1]['age'] = 30;
+// $personalInfos[2]['age'] = 28;
 
 var_dump($personalInfos);
 
